@@ -1,0 +1,324 @@
+---
+title: "Chromatin Segmentation Analysis Using segmentr"
+output: rmarkdown::html_vignette
+vignette: >
+    %\VignetteIndexEntry{Chromatin Segmentation Analysis Using segmentr}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE
+)
+```
+
+# Overview
+
+# Installation
+
+```{r install, eval=FALSE}
+# install from bioconductor
+BiocManager::install('segmentr')
+
+# install from github
+remotes::install_github('MahShaaban/segmentr@devel')
+```
+
+# Background
+## Hidden Markov Models
+## ChromHMM
+## This package!
+
+# Getting started
+
+```{r load_library, eval=FALSE}
+# load library
+library(segmentr)
+```
+
+```{r prepare_directories, message = FALSE, eval=FALSE}
+# locate input and output files
+inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
+                        package = 'segmentr')
+coordsdir <- system.file('extdata/ChromHMM/COORDS',
+                         package = 'segmentr')
+anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
+                          package = 'segmentr')
+chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+                             'hg18.txt',
+                             package = 'segmentr')
+```
+
+```{r getting_stated, eval=FALSE}
+# run command
+obj <- learn_model(inputdir = inputdir,
+                   coordsdir = coordsdir,
+                   anchorsdir = anchorsdir,
+                   chromsizefile = chromsizefile,
+                   numstates = 3,
+                   assembly = 'hg18',
+                   cells = c('K562', 'GM12878'),
+                   annotation = 'RefSeq',
+                   binsize = 200)
+```
+
+```{r show, eval=FALSE}
+# show the object
+show(obj)
+```
+
+# Segmentation analysis
+## Inputs
+
+```{r setup}
+# load required libraries
+library(segmentr)
+library(Gviz)
+library(ComplexHeatmap)
+library(TxDb.Hsapiens.UCSC.hg18.knownGene)
+```
+
+```{r binarize, eval=FALSE}
+# locate input and output files
+inputdir <- system.file("extdata", package = "bamsignals")
+cellmarkfiletable <- system.file('extdata/input',
+                                 'cell_mark_table.tsv',
+                                 package = 'segmentr')
+chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+                             'hg18.txt',
+                              package = 'segmentr')
+outputdir <- tempdir()
+
+# run command
+binarize_bam(inputdir,
+             chromsizefile = chromsizefile,
+             cellmarkfiletable = cellmarkfiletable,
+             outputdir = outputdir)
+
+# show output files
+list.files(outputdir, pattern = '*_binary.txt')
+```
+
+## Model learning
+
+```{r run_command, eval=FALSE}
+# locate input and output files
+inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
+                        package = 'segmentr')
+coordsdir <- system.file('extdata/ChromHMM/COORDS',
+                         package = 'segmentr')
+anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
+                          package = 'segmentr')
+chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+                             'hg18.txt',
+                             package = 'segmentr')
+outputdir <- tempdir()
+
+# run command
+obj <- learn_model(inputdir = inputdir,
+                   coordsdir = coordsdir,
+                   anchorsdir = anchorsdir,
+                   outputdir = outputdir,
+                   chromsizefile = chromsizefile,
+                   numstates = 3,
+                   assembly = 'hg18',
+                   cells = c('K562', 'GM12878'),
+                   annotation = 'RefSeq',
+                   binsize = 200)
+```
+
+```{r load_obj,include=FALSE}
+# TODO: to be removed
+obj <- test_obj 
+```
+
+## Output `Segmentation` Object
+
+```{r methods}
+# show the object
+show(obj)
+```
+
+```{r accessors}
+# access object slots
+emission(obj)
+```
+
+# Comparing models
+
+```{r multiple_numstates, eval=FALSE}
+# relearn the models with 3 to 8 states
+objs <- lapply(3:8,
+    function(x) {
+      learn_model(inputdir = inputdir,
+                   coordsdir = coordsdir,
+                   anchorsdir = anchorsdir,
+                   chromsizefile = chromsizefile,
+                   numstates = x,
+                   assembly = 'hg18',
+                   cells = c('K562', 'GM12878'),
+                   annotation = 'RefSeq',
+                   binsize = 200)
+    })
+```
+
+```{r load_objs,include=FALSE}
+# TODO: to be removed
+objs <- test_objs
+```
+
+```{r compare_numstats}
+# compare the models max correlation between the states
+compare_models(objs)
+```
+
+```{r compare_likelihood}
+# compare the models likelihood
+compare_models(objs, type = 'likelihood')
+```
+
+```{r plot_comparison,fig.align='center',fig.width=7,fig.height=4}
+# compare models plots
+par(mfrow = c(1, 2))
+compare_models(objs,
+               plot = TRUE,
+               xlab = 'Model', ylab = 'State Correlation')
+compare_models(objs, type = 'likelihood',
+               plot = TRUE,
+               xlab = 'Model', ylab = 'Likelihood')
+```
+
+# Interpreting models parameters
+
+## Emissions & transitions
+
+```{r parameters}
+# access object slots
+emission(obj)
+transition(obj)
+```
+
+```{r visulaize_matrices,fig.align='center',fig.height=3,fig.width=6}
+# emission and transition plots
+h1 <- plot_heatmap(obj,
+                   row_labels = paste('S', 1:3),
+                   name = 'Emission')
+
+h2 <- plot_heatmap(obj,
+                   type = 'transition',
+                   row_labels = paste('S', 1:3),
+                   column_labels = paste('S', 1:3),
+                   name = 'Transition')
+h1 + h2
+```
+
+## Overlap Enrichemnt
+
+```{r overlap}
+# overlap enrichment
+overlap(obj)
+```
+
+```{r visulaizing_overlap,fig.align='center',fig.height=3,fig.width=6}
+# overlap enrichment plots
+plot_heatmap(obj,
+             type = 'overlap',
+             column_labels = c('Genome', 'CpG', 'Exon', 'Gene',
+                               'TES', 'TSS', 'TSS2kb', 'laminB1lads'),
+             show_heatmap_legend = FALSE)
+```
+
+## Genomic locations enrichment
+
+```{r genomic_locations}
+# genomic locations enrichment
+TSS(obj)
+TES(obj)
+```
+
+```{r visualizing_genomic_locaitons,fig.align='center',fig.height=3,fig.width=7}
+# genomic locations enrichment plots
+h1 <- plot_heatmap(obj,
+                   type = 'TSS',
+                   show_heatmap_legend = FALSE)
+h2 <- plot_heatmap(obj,
+                   type = 'TES',
+                   show_heatmap_legend = FALSE)
+
+h1 + h2
+```
+
+## Segments
+
+```{r segments}
+# get segments
+segment(obj)
+```
+
+```{r visulaize_segments,fig.align='center',fig.height=3,fig.width=3}
+# gene gene coordinates
+gen <- genes(TxDb.Hsapiens.UCSC.hg18.knownGene,
+             filter = list(gene_id = 38))
+
+# extend genomic region
+prom <- promoters(gen,
+                  upstream = 10000,
+                  downstream = 10000)
+
+# annotation track
+segs1 <- segment(obj, 'K562')
+atrack1 <- AnnotationTrack(segs1$K562,
+                          group = segs1$K562$state,
+                          name = 'K562')
+
+segs2 <- segment(obj, 'GM12878')
+atrack2 <- AnnotationTrack(segs2$GM12878,
+                          group = segs2$GM12878$state,
+                          name = 'GM12878')
+
+# plot the track
+plotTracks(atrack1, from = start(prom), to = end(prom))
+plotTracks(atrack2, from = start(prom), to = end(prom))
+```
+
+```{r add_tracks,fig.align='center',fig.height=4,fig.width=4}
+# ideogram track
+itrack <- IdeogramTrack(genome = 'hg18', chromosome = 11)
+
+# genome axis track
+gtrack <- GenomeAxisTrack()
+
+# gene region track
+data("geneModels")
+grtrack <- GeneRegionTrack(geneModels,
+                           genom = 'hg18',
+                           chromosome = 11,
+                           name = 'ACAT1')
+
+# put all tracks together
+plotTracks(list(itrack, gtrack, grtrack, atrack1, atrack2),
+           from = min(start(prom)),
+           to = max(end(gen)),
+           groupAnnotation = 'group')
+```
+
+```{r segment_frequency}
+# get segment frequency
+get_frequency(segment(obj), tidy = TRUE)
+```
+
+```{r plot_frequency,fig.align='center',fig.width=7,fig.height=4}
+# frequency plots
+par(mfrow=c(1, 2))
+get_frequency(segment(obj),
+              plot = TRUE,
+              ylab = 'Segment Frequency')
+
+get_frequency(segment(obj),
+              normalize = TRUE,
+              plot = TRUE,
+              ylab = 'Segment Fraction')
+```

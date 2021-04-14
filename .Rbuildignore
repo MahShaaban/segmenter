@@ -1,0 +1,10 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^doc$
+^Meta$
+^inst/extdata/ChromHMM/\.git$
+^inst/extdata/ChromHMM/ChromHMM_manual\.pdf$
+^inst/extdata/ChromHMM/ChromHMM\.zip$
+^inst/extdata/ChromHMM/README\.md$
+^\.github$
+^data-raw$
