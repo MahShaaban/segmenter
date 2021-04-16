@@ -3,18 +3,29 @@
 
 # segmentr
 
-Call chromHMM from within R, capture the output files in an R object and
-interface to other relevant analysis tools in R.
+Perform Chromatin Segmentation Analysis in R by Calling ChromHMM
+
+## Description
+
+Call *chromHMM* from within *R*, capture the output files in an `S4`  object and 
+interface to other relevant Bioconductor analysis tools. In addition `segmentr` 
+provides functions to test, select and visualize the output of the segmentation.
 
 ## Installation
 
-You can install the released version of segmentr from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of `segmentr` from [Bioconductor](https://bioconductor.org/) with:
 
 ``` r
-install.packages("segmentr")
+BiocManager::install("segmentr")
 ```
 
-## Example
+or the development version from GitHub with:
+
+```r
+remotes::install_github('MahShaaban/segmentr@devel')
+```
+
+## Getting started
 
 ```r
 # load required libraries
@@ -22,10 +33,10 @@ library(segmentr)
 ```
 
 ```r
-# locate input and output files
+# locate input and annotation files
 inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
                         package = 'segmentr')
-outputdir <- tempdir()
+                        
 coordsdir <- system.file('extdata/ChromHMM/COORDS',
                          package = 'segmentr')
 anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
@@ -33,10 +44,11 @@ anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
 chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                              'hg18.txt',
                              package = 'segmentr')
+```
 
+```r
 # run command
 obj <- learn_model(inputdir = inputdir,
-                   outputdir = outputdir,
                    coordsdir = coordsdir,
                    anchorsdir = anchorsdir,
                    chromsizefile = chromsizefile,
@@ -61,5 +73,3 @@ emission(obj)
 # operate on the object
 get_frequency(segments = segment(obj))
 ```
-
-

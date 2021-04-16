@@ -1,12 +1,15 @@
 Package: segmentr
 Type: Package
-Title: Perform chromatin segmentation analysis in R by calling ChromHMM
+Title: Perform Chromatin Segmentation Analysis in R by Calling ChromHMM
 Version: 0.0.99
-Description: Call chromHMM from within R, capture the output files in an R 
-    object and interface to other relevant analysis tools in R.
+Description: Call chromHMM from within R, capture the output files in an S4 
+    object and interface to other relevant Bioconductor analysis tools. In 
+    addition segmentr provides functions to test, select and visualize the 
+    output of the segmentation.
 Authors@R: person("Mahmoud", "Ahmed",
                   email = "mahmoud.s.fahmy@students.kasralainy.edu.eg",
-                  role = c("aut", "cre"))
+                  role = c("aut", "cre"),
+                  comment = c(ORCID = "0000-0002-4377-6541"))
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
