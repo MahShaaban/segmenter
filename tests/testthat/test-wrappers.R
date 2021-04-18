@@ -2,15 +2,15 @@ context("Test Wrappers")
 
 test_that("learn_model works", {
     inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
-                            package = 'segmentr')
+                            package = 'segmenter')
     outputdir <- tempdir()
     coordsdir <- system.file('extdata/ChromHMM/COORDS',
-                             package = 'segmentr')
+                             package = 'segmenter')
     anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
-                              package = 'segmentr')
+                              package = 'segmenter')
     chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                                  'hg18.txt',
-                                 package = 'segmentr')
+                                 package = 'segmenter')
     obj <- learn_model(inputdir = inputdir,
                        outputdir = outputdir,
                        coordsdir = coordsdir,
@@ -26,7 +26,7 @@ test_that("learn_model works", {
 })
 
 test_that("can make file names.", {
-    outputdir <- system.file('extdata/output', package = 'segmentr')
+    outputdir <- system.file('extdata/output', package = 'segmenter')
 
     expect_true(file.exists(file.path(outputdir, model_file(3))))
     expect_true(file.exists(file.path(outputdir, emissions_file(3))))

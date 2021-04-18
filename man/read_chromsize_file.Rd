@@ -20,7 +20,7 @@ chromosome and the other for its length.
 # locate the file
 chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                              'hg18.txt',
-                             package = 'segmentr')
+                             package = 'segmenter')
 
 # read the file
 read_chromsize_file(chromsizefile)

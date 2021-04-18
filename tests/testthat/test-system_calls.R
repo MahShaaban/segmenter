@@ -2,15 +2,15 @@ context("Test System Calls")
 
 test_that("LearnModel works", {
     inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
-                            package = 'segmentr')
+                            package = 'segmenter')
     outputdir <- tempdir()
     coordsdir <- system.file('extdata/ChromHMM/COORDS',
-                             package = 'segmentr')
+                             package = 'segmenter')
     anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
-                              package = 'segmentr')
+                              package = 'segmenter')
     chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                                  'hg18.txt',
-                                  package = 'segmentr')
+                                  package = 'segmenter')
 
     expect_null(
         LearnModel(inputdir = inputdir,

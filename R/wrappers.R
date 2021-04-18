@@ -43,15 +43,15 @@
 #' @examples
 #' # locate input and output files
 #' inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
-#'                         package = 'segmentr')
+#'                         package = 'segmenter')
 #' outputdir <- tempdir()
 #' coordsdir <- system.file('extdata/ChromHMM/COORDS',
-#'                          package = 'segmentr')
+#'                          package = 'segmenter')
 #' anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
-#'                           package = 'segmentr')
+#'                           package = 'segmenter')
 #' chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
 #'                              'hg18.txt',
-#'                              package = 'segmentr')
+#'                              package = 'segmenter')
 #'
 #' # run command
 #' obj <- learn_model(inputdir = inputdir,
@@ -242,10 +242,10 @@ learn_model <- function(inputdir, outputdir, numstates, coordsdir, anchorsdir,
 #' @examples
 #' # locate input and output files
 #' inputdir <- system.file("extdata", package = "bamsignals")
-#' cellmarkfiletable <- system.file('extdata/input','cell_mark_table.tsv', package = 'segmentr')
+#' cellmarkfiletable <- system.file('extdata/input','cell_mark_table.tsv', package = 'segmenter')
 #' chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
 #'                              'hg18.txt',
-#'                               package = 'segmentr')
+#'                               package = 'segmenter')
 #' outputdir <- tempdir()
 #'
 #' # run command

@@ -33,10 +33,10 @@ Transform the aligned reads into a binary format.
 \examples{
 # locate input and output files
 inputdir <- system.file("extdata", package = "bamsignals")
-cellmarkfiletable <- system.file('extdata/input','cell_mark_table.tsv', package = 'segmentr')
+cellmarkfiletable <- system.file('extdata/input','cell_mark_table.tsv', package = 'segmenter')
 chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                              'hg18.txt',
-                              package = 'segmentr')
+                              package = 'segmenter')
 outputdir <- tempdir()
 
 # run command

@@ -28,7 +28,7 @@ LearnModel <- function(inputdir, outputdir, numstates, coordsdir, anchorsdir,
     LearnModel <- paste(
         system.file("extdata/ChromHMM",
                     "ChromHMM.jar",
-                    package = "segmentr"),
+                    package = "segmenter"),
         "LearnModel"
     )
 
@@ -96,7 +96,7 @@ Binarize <- function(inputdir, cellmarkfiletable, chromsizefile, binsize,
     module <- paste(
         system.file("extdata/ChromHMM",
                     "ChromHMM.jar",
-                    package = "segmentr"),
+                    package = "segmenter"),
         type
     )
 

@@ -3,10 +3,10 @@ context("Test Utils")
 test_that("tidy_ranges works.", {
     binfile <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18/',
                            'K562_chr11_binary.txt.gz',
-                           package = 'segmentr')
+                           package = 'segmenter')
     chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                                  'hg18.txt',
-                                 package = 'segmentr')
+                                 package = 'segmenter')
 
     bins <- read_bins_file(binfile)
     gr <- range_bins(list(bins), chromsizefile, 200, tidy = FALSE)
@@ -26,10 +26,10 @@ test_that("tidy_ranges works.", {
 test_that("range_bins works.", {
     binfile <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18/',
                            'K562_chr11_binary.txt.gz',
-                           package = 'segmentr')
+                           package = 'segmenter')
     chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                                  'hg18.txt',
-                                 package = 'segmentr')
+                                 package = 'segmenter')
 
     bins <- read_bins_file(binfile)
     gr <- range_bins(list(bins), chromsizefile, 200, tidy = FALSE)
@@ -97,7 +97,7 @@ test_that("count_reads_ranges works.", {
 
     cellmarkfiletable <- system.file('extdata/input',
                                      'cell_mark_table.tsv',
-                                     package = 'segmentr')
+                                     package = 'segmenter')
 
     rand_anno <- system.file("extdata",
                              "randomAnnot.Rdata",
@@ -114,15 +114,15 @@ test_that("count_reads_ranges works.", {
 
 test_that("merge_segments_bins works.", {
     inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
-                            package = 'segmentr')
+                            package = 'segmenter')
     outputdir <- tempdir()
     coordsdir <- system.file('extdata/ChromHMM/COORDS',
-                             package = 'segmentr')
+                             package = 'segmenter')
     anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
-                              package = 'segmentr')
+                              package = 'segmenter')
     chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                                  'hg18.txt',
-                                 package = 'segmentr')
+                                 package = 'segmenter')
     obj <- learn_model(inputdir = inputdir,
                        outputdir = outputdir,
                        coordsdir = coordsdir,

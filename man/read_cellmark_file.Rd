@@ -20,7 +20,7 @@ names of the cells/conditions, the available marks and binarized data files.
 # locate the file
 fl <- system.file('extdata/input',
                   'cell_mark_table.tsv',
-                  package = 'segmentr')
+                  package = 'segmenter')
 
 # read the file
 read_cellmark_file(fl)

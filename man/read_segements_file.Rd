@@ -22,7 +22,7 @@ The segments files are the output of running \code{learn_model} and named
 # locate the file
 segmentfile <- system.file('extdata/output',
                            'GM12878_3_segments.bed',
-                           package = 'segmentr')
+                           package = 'segmenter')
 
 # read the file
 segs <- read_segements_file(segmentfile)

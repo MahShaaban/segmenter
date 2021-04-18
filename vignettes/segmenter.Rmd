@@ -1,8 +1,8 @@
 ---
-title: "Chromatin Segmentation Analysis Using segmentr"
+title: "Chromatin Segmentation Analysis Using segmenter"
 output: rmarkdown::html_vignette
 vignette: >
-    %\VignetteIndexEntry{Chromatin Segmentation Analysis Using segmentr}
+    %\VignetteIndexEntry{Chromatin Segmentation Analysis Using segmenter}
     %\VignetteEngine{knitr::rmarkdown}
     %\VignetteEncoding{UTF-8}
 ---
@@ -23,11 +23,11 @@ to predict the chromatin's underlying (hidden) states. *ChromHMM*, written in
 *Java*, integrates histone modification datasets to learn the chromatin states
 de-novo. We developed an *R* package around this program to leverage the
 existing *R/Bioconductor* tools and data structures in the segmentation analysis
-context. `segmentr` wraps the *Java* modules to call *ChromHMM* and captures the
+context. `segmenter` wraps the *Java* modules to call *ChromHMM* and captures the
 output in an `S4` object. This allows for iterating with different parameters,
 which are given in *R* syntax. Capturing the output in *R* makes it easier to
 work with the results and to integrate them in downstream analyses. Finally, 
-`segmentr` provides additional tools to test, select and visualize the models.
+`segmenter` provides additional tools to test, select and visualize the models.
 
 # Installation
 
@@ -36,10 +36,10 @@ GitHub using `remotes``
 
 ```{r install, eval=FALSE}
 # install from bioconductor
-BiocManager::install('segmentr')
+BiocManager::install('segmenter')
 
 # install from github
-remotes::install_github('MahShaaban/segmentr@devel')
+remotes::install_github('MahShaaban/segmenter@devel')
 ```
 
 # Background
@@ -67,7 +67,7 @@ they might impact the gene regulation.
 
 ## This package!
 
-The goal of the `segmentr` package is to
+The goal of the `segmenter` package is to
 
 - Call *ChromHMM* using R syntax
 - Capture the output in R objects
@@ -75,17 +75,17 @@ The goal of the `segmentr` package is to
 
 # Getting started
 
-This is a quick example of using `segmentr` to call the Java modules and will be
+This is a quick example of using `segmenter` to call the Java modules and will be
 followed by a detailed description in the following sections.
 
 First, we need to load the package
 
 ```{r load_library, eval=FALSE}
 # load library
-library(segmentr)
+library(segmenter)
 ```
 
-The Java modules and example files are bundled with `segmentr`. We can locate
+The Java modules and example files are bundled with `segmenter`. We can locate
 these files using `system.file`. The required files are the binarized data, 
 genomic coordinates, anchors files and the chromosomes' sizes file. When more 
 than one file is required, passing the directory where they reside is 
@@ -94,14 +94,14 @@ sufficient.
 ```{r prepare_directories, message = FALSE, eval=FALSE}
 # locate input and annotation files
 inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
-                        package = 'segmentr')
+                        package = 'segmenter')
 coordsdir <- system.file('extdata/ChromHMM/COORDS',
-                         package = 'segmentr')
+                         package = 'segmenter')
 anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
-                          package = 'segmentr')
+                          package = 'segmenter')
 chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                              'hg18.txt',
-                             package = 'segmentr')
+                             package = 'segmenter')
 ```
 
 Other arguments are required to ensure the Java modules correctly recognize the
@@ -130,10 +130,10 @@ show(obj)
 ```
 
 The rest of this document discusses in details the inputs and outputs mentioned
-above as well as some of the tools provided in `segmentr` to explore the 
+above as well as some of the tools provided in `segmenter` to explore the 
 resulting chromatin models.
 
-# Segmentation analysis using `segmentr`
+# Segmentation analysis using `segmenter`
 
 ## Inputs
 
@@ -153,7 +153,7 @@ be using the human genome (hg18).
 
 ```{r setup}
 # load required libraries
-library(segmentr)
+library(segmenter)
 library(Gviz)
 library(ComplexHeatmap)
 library(TxDb.Hsapiens.UCSC.hg18.knownGene)
@@ -162,20 +162,20 @@ library(TxDb.Hsapiens.UCSC.hg18.knownGene)
 ```{r genomic_annotations}
 # coordinates
 coordsdir <- system.file('extdata/ChromHMM/COORDS',
-                         package = 'segmentr')
+                         package = 'segmenter')
 
 list.files(file.path(coordsdir, 'hg18'))
 
 # anchors
 anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
-                          package = 'segmentr')
+                          package = 'segmenter')
 
 list.files(file.path(anchorsdir, 'hg18'))
 
 # chromosomes' sizes
 chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                              'hg18.txt',
-                              package = 'segmentr')
+                              package = 'segmenter')
 
 readLines(chromsizefile, n = 3)
 ```
@@ -203,7 +203,7 @@ bin size is indicated, the default is 200kb.
 # a table to assign marker and cell names to the bam files
 cellmarkfiletable <- system.file('extdata/input',
                                  'cell_mark_table.tsv',
-                                 package = 'segmentr')
+                                 package = 'segmenter')
 
 readLines(cellmarkfiletable, n = 3)
 ```
@@ -241,14 +241,14 @@ cell lines. The aligned reads were counted and binarized into 0 or 1 in bins of
 ```{r input_bins}
 # locate input and output files
 inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
-                        package = 'segmentr')
+                        package = 'segmenter')
 
 list.files(inputdir)
 ```
 
 ## Model learning
 
-The main function in `segmentr` is called `learn_model`. This wraps the the Java
+The main function in `segmenter` is called `learn_model`. This wraps the the Java
 module that learns a chromatin segmentation model of a given number of states.
 In addition to the input files explained before the function takes the desired
 number of stats, `numstates` and the information that were used to generate the
@@ -324,7 +324,7 @@ To choose a model that fits the data well, one can learn multiple models with
 different parameters, for example the number of states and compare them. In this
 example, we will be calling `learn_model` several times using `lapply` with the 
 same inputs except the number of states (`numstates`). The output would be a
-list of `segmentation` objects. `segmentr` contain functions to do basic 
+list of `segmentation` objects. `segmenter` contain functions to do basic 
 comparison between the models.
 
 ```{r multiple_numstates, eval=FALSE}

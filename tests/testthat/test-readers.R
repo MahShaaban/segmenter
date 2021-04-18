@@ -3,7 +3,7 @@ context("Test Readers")
 test_that("read_chromsize_file works", {
     chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                                  'hg18.txt',
-                                 package = 'segmentr')
+                                 package = 'segmenter')
     res <- read_chromsize_file(chromsizefile)
     expect_true(is.data.frame(res))
     expect_true(is.character(res$seqname))
@@ -13,7 +13,7 @@ test_that("read_chromsize_file works", {
 test_that("read_segements_file works", {
     segmentfile <- system.file('extdata/output',
                                  'GM12878_3_segments.bed',
-                                 package = 'segmentr')
+                                 package = 'segmenter')
     res <- read_segements_file(segmentfile)
 
     expect_true(is.data.frame(res))
@@ -31,7 +31,7 @@ test_that("read_segements_file works", {
 test_that("read_emissions_file works", {
     fl <- system.file('extdata/output',
                       'emissions_3.txt',
-                      package = 'segmentr')
+                      package = 'segmenter')
 
     res <- read_emissions_file(fl)
     states <- paste0('S', seq_len(nrow(res)))
@@ -52,7 +52,7 @@ test_that("read_emissions_file works", {
 test_that("read_transitions_file works", {
     fl <- system.file('extdata/output',
                       'transitions_3.txt',
-                      package = 'segmentr')
+                      package = 'segmenter')
 
     res <- read_transitions_file(fl)
     states <- paste0('S', seq_len(nrow(res)))
@@ -72,7 +72,7 @@ test_that("read_transitions_file works", {
 test_that("read_overlap_file works", {
     fl <- system.file('extdata/output',
                       'GM12878_3_overlap.txt',
-                      package = 'segmentr')
+                      package = 'segmenter')
 
     res <- read_overlap_file(fl)
     states <- paste0('S', seq_len(nrow(res)))
@@ -93,7 +93,7 @@ test_that("read_overlap_file works", {
 test_that("read_enrichment_file works", {
     fl <- system.file('extdata/output',
                       'GM12878_3_RefSeqTSS_neighborhood.txt',
-                      package = 'segmentr')
+                      package = 'segmenter')
 
     res <- read_enrichment_file(fl)
     states <- paste0('S', seq_len(nrow(res)))
@@ -114,7 +114,7 @@ test_that("read_enrichment_file works", {
 test_that("read_model_file works.", {
     fl <- system.file('extdata/output',
                       'model_3.txt',
-                      package = 'segmentr')
+                      package = 'segmenter')
     res <- read_model_file(fl)
 
     expect_true(is.list(res))
@@ -123,7 +123,7 @@ test_that("read_model_file works.", {
 test_that("read_model_file works.", {
     fl <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18/',
                       'GM12878_chr11_binary.txt.gz',
-                      package = 'segmentr')
+                      package = 'segmenter')
     res <- read_bins_file(fl)
 
     expect_true(is.list(res))
@@ -135,7 +135,7 @@ test_that("read_model_file works.", {
 test_that("read_cellmark_file works.", {
     fl <- system.file('extdata/input',
                       'cell_mark_table.tsv',
-                      package = 'segmentr')
+                      package = 'segmenter')
 
     df <- read_cellmark_file(fl)
     expect_true(is.data.frame(df))

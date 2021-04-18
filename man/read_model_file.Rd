@@ -20,7 +20,7 @@ The model file is the output of running \code{learn_model} and named
 # locate the file
 modelfile <- system.file('extdata/output',
                          'model_3.txt',
-                         package = 'segmentr')
+                         package = 'segmenter')
 
 # read the file
 read_model_file(modelfile)

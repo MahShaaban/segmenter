@@ -1,10 +1,10 @@
-Package: segmentr
+Package: segmenter
 Type: Package
 Title: Perform Chromatin Segmentation Analysis in R by Calling ChromHMM
 Version: 0.0.99
 Description: Call chromHMM from within R, capture the output files in an S4 
     object and interface to other relevant Bioconductor analysis tools. In 
-    addition segmentr provides functions to test, select and visualize the 
+    addition segmenter provides functions to test, select and visualize the 
     output of the segmentation.
 Authors@R: person("Mahmoud", "Ahmed",
                   email = "mahmoud.s.fahmy@students.kasralainy.edu.eg",

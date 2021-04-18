@@ -2,18 +2,18 @@
 
 # locate input and output files
 inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
-                        package = 'segmentr')
+                        package = 'segmenter')
 outputdir <- system.file('extdata/output',
-                         package = 'segmentr')
+                         package = 'segmenter')
 coordsdir <- system.file('extdata/ChromHMM/COORDS',
-                         package = 'segmentr')
+                         package = 'segmenter')
 anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
-                          package = 'segmentr')
+                          package = 'segmenter')
 chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
                              'hg18.txt',
-                             package = 'segmentr')
+                             package = 'segmenter')
 # run command
-test_obj <- segmentr::learn_model(
+test_obj <- segmenter::learn_model(
     inputdir = inputdir,
     outputdir = outputdir,
     coordsdir = coordsdir,
@@ -33,7 +33,7 @@ usethis::use_data(test_obj, overwrite = TRUE)
 # run command with multiple states
 test_objs <- lapply(3:8,
                     function(x) {
-                        segmentr::learn_model(inputdir = inputdir,
+                        segmenter::learn_model(inputdir = inputdir,
                                               coordsdir = coordsdir,
                                               anchorsdir = anchorsdir,
                                               chromsizefile = chromsizefile,

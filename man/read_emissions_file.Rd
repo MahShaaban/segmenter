@@ -24,7 +24,7 @@ The segments files are the output of running \code{learn_model} and named
 # locate the file
 fl <- system.file('extdata/output',
                            'emissions_3.txt',
-                           package = 'segmentr')
+                           package = 'segmenter')
 
 # read the file
 read_emissions_file(fl)

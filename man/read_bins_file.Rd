@@ -20,7 +20,7 @@ the binarized data from all marks in the rest.
 # locate the file
 fl <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18/',
                   'GM12878_chr11_binary.txt.gz',
-                  package = 'segmentr')
+                  package = 'segmenter')
 
 # read the file
 read_bins_file(fl)
