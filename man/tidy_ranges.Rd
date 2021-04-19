@@ -20,3 +20,7 @@ A \code{GRanges} object
 \description{
 Tidy the metadata of a \code{GRanges} object
 }
+\examples{
+tidy_ranges(segment(test_obj, cell = 'K562')[[1]])
+
+}

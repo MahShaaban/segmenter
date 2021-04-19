@@ -7,6 +7,9 @@
 #'
 #' @return A \code{GRanges} object
 #'
+#' @examples
+#' tidy_ranges(segment(test_obj, cell = 'K562')[[1]])
+#'
 #' @importFrom S4Vectors values 'values<-'
 #' @importFrom utils stack
 #'

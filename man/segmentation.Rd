@@ -15,39 +15,44 @@ data is optional. The object is returned as a result of calling
 \section{Slots}{
 
 \describe{
-\item{\code{model}}{list. The \code{list} consists of 6 items corresponding to the
-contents of the \code{model_#.txt} file. These are \code{number_states} and
-\code{number_marks} for the numbers of states and marks in the model;
-\code{likelihood} and \code{probinit} for the likelihood and the initial
-probabilities of the multi-state model; \code{transitionprobs} and
-\code{emissionprobs} for the probabilities of the transitions and emissions
-parameters of the model. Can be accessed using \code{\link{model}}}
+\item{\code{model}}{list. The \code{list} consists of 6 items corresponding
+to the contents of the \code{model_#.txt} file. These are
+\code{number_states} and \code{number_marks} for the numbers of states
+and marks in the model; \code{likelihood} and \code{probinit} for the
+likelihood and the initial probabilities of the multi-state model;
+\code{transitionprobs} and \code{emissionprobs} for the probabilities
+of the transitions and emissions parameters of the model. Can be
+accessed using \code{\link{model}}.}
 
-\item{\code{emission}}{matrix. The \code{matrix} contains the emission parameters of
-n states (rows) for n marks (columns) corresponding to the contents of the
-\code{emission_#.txt} file. Can be accessed using \code{\link{emission}}.}
+\item{\code{emission}}{matrix. The \code{matrix} contains the emission
+parameters of n states (rows) for n marks (columns) corresponding to
+the contents of the \code{emission_#.txt} file. Can be accessed using
+\code{\link{emission}}.}
 
-\item{\code{transition}}{matrix. The \code{matrix} contains the transition parameters
-of n by n states corresponding to the contents of the \code{transition_#.txt}
-file. Can be accessed using \code{\link{transition}}.}
+\item{\code{transition}}{matrix. The \code{matrix} contains the transition
+parameters of n by n states corresponding to the contents of the
+\code{transition_#.txt} file. Can be accessed using
+\code{\link{transition}}.}
 
 \item{\code{overlap}}{list. A \code{list} of n number of cells/conditions items.
-Each item is a \code{matrix} of the overlap enrichment of n states (rows) at
-n genomic annotations (columns) corresponding to the contents of the
-\code{<cell>_#_overlap.txt} files. Can be accessed using
+Each item is a \code{matrix} of the overlap enrichment of n states
+(rows) at n genomic annotations (columns) corresponding to the contents
+of the \code{<cell>_#_overlap.txt} files. Can be accessed using
 \code{\link{overlap}}.}
 
 \item{\code{TSS}}{list. A \code{list} of n number of cells/conditions items.
-Each item is a \code{matrix} of the overlap enrichment of n states (rows) at
-n locations around the transcription start site (TSS) (columns)
-corresponding to the contents of the \code{<cell>_#_TSS_neighborhood.txt}
-files. Can be accessed using \code{\link{TSS}}.}
+Each item is a \code{matrix} of the overlap enrichment of n states
+(rows) at n locations around the transcription start site (TSS)
+(columns) corresponding to the contents of the
+\code{<cell>_#_TSS_neighborhood.txt} files. Can be accessed using
+\code{\link{TSS}}.}
 
 \item{\code{TES}}{list. A \code{list} of n number of cells/conditions items.
-Each item is a \code{matrix} of the overlap enrichment of n states (rows) at
-n locations around the transcription end site (TES) (columns)
-corresponding to the contents of the \code{<cell>_#_TES_neighborhood.txt}
-files. Can be accessed using \code{\link{TES}}.}
+Each item is a \code{matrix} of the overlap enrichment of n states
+(rows) at n locations around the transcription end site (TES)
+(columns) corresponding to the contents of the
+\code{<cell>_#_TES_neighborhood.txt} files. Can be accessed using
+\code{\link{TES}}.}
 
 \item{\code{segment}}{list. A \code{list} of n number of cells/conditions items.
 Each item is a \code{\link[GenomicRanges]{GRanges}} object containing the

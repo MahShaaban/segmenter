@@ -89,9 +89,44 @@ markers(object)
 
 \item{cell}{A string}
 }
+\value{
+The data in the corresponding slot or a subset of it.
+}
 \description{
 These functions can be used to access the contents of \code{segmentation}
 objects as well as modifying them.
+}
+\examples{
+model(test_obj)
+
+emission(test_obj)
+
+transition(test_obj)
+
+overlap(test_obj)
+overlap(test_obj, cell = 'K562')
+
+TSS(test_obj)
+TSS(test_obj, cell = 'K562')
+
+TES(test_obj)
+TES(test_obj, cell = 'K562')
+
+segment(test_obj)
+segment(test_obj, cell = 'K562')
+
+bins(test_obj)
+
+counts(test_obj)
+
+likelihood(test_obj)
+
+cells(test_obj)
+
+states(test_obj)
+
+markers(test_obj)
+
 }
 \seealso{
 segmentation

@@ -21,3 +21,8 @@ A numeric vector or a plot with the same values.
 \description{
 Compare two or more models
 }
+\examples{
+compare_models(test_objs)
+compare_models(test_objs, type = 'likelihood')
+
+}

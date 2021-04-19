@@ -1,8 +1,8 @@
-#' Lean a multi-state model from chromatin data
+#' Learn a multi-state model from chromatin data
 #'
 #' Integrate multiple ChIP-seq chromatin datasets of histone modifications,
 #' transcription factors or other DNA binding proteins to build a multi-state
-#' model of the combinatorial and spatial frequently occuring patterns.
+#' model of the combinatorial and spatial frequently occurring patterns.
 #' The function uses as an input binarized ChIP-seq data and the genome
 #' annotations on which the states will be discovered.
 #'
@@ -10,7 +10,7 @@
 #' @param outputdir A string. The path to a directory where output will be
 #' written.
 #' @param numstates An integer. The number of desired states in the model.
-#' @param coordsdir A string. The path to genomic coordiantes files.
+#' @param coordsdir A string. The path to genomic coordinates files.
 #' @param anchorsdir A string. The path to the genomic anchors files.
 #' @param chromsizefile A string. The path to the chromosomes sizes file.
 #' @param cells A \code{character} vector. The names of the cells as they occur
@@ -86,13 +86,13 @@ learn_model <- function(inputdir, outputdir, numstates, coordsdir, anchorsdir,
 
     # call LearnModel from R
     if (!read_only) {
-        LearnModel(inputdir,
-                   outputdir,
-                   numstates,
-                   coordsdir,
-                   anchorsdir,
-                   chromsizefile,
-                   assembly)
+        .LearnModel(inputdir,
+                    outputdir,
+                    numstates,
+                    coordsdir,
+                    anchorsdir,
+                    chromsizefile,
+                    assembly)
     }
 
     # capture output
@@ -242,7 +242,9 @@ learn_model <- function(inputdir, outputdir, numstates, coordsdir, anchorsdir,
 #' @examples
 #' # locate input and output files
 #' inputdir <- system.file("extdata", package = "bamsignals")
-#' cellmarkfiletable <- system.file('extdata/input','cell_mark_table.tsv', package = 'segmenter')
+#' cellmarkfiletable <- system.file('extdata/input',
+#'                                  'cell_mark_table.tsv',
+#'                                  package = 'segmenter')
 #' chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
 #'                              'hg18.txt',
 #'                               package = 'segmenter')
@@ -260,8 +262,8 @@ learn_model <- function(inputdir, outputdir, numstates, coordsdir, anchorsdir,
 #' @seealso Binarize binarize_bed
 #'
 #' @export
-binarize_bam <- function(inputdir, cellmarkfiletable, chromsizefile, binsize = 200,
-                         outputdir) {
+binarize_bam <- function(inputdir, cellmarkfiletable, chromsizefile,
+                         binsize = 200, outputdir) {
 
     # make a temporary directory when missing
     if (missing(outputdir)) {
@@ -269,12 +271,12 @@ binarize_bam <- function(inputdir, cellmarkfiletable, chromsizefile, binsize = 2
     }
 
     # call Binarize from R
-    Binarize(inputdir,
-             cellmarkfiletable,
-             chromsizefile,
-             binsize,
-             outputdir,
-             type = 'bam')
+    .Binarize(inputdir,
+              cellmarkfiletable,
+              chromsizefile,
+              binsize,
+              outputdir,
+              type = 'bam')
 }
 
 #' Binarize the bed files
@@ -288,8 +290,8 @@ binarize_bam <- function(inputdir, cellmarkfiletable, chromsizefile, binsize = 2
 #' @seealso Binarize binarize_bam
 #'
 #' @export
-binarize_bed <- function(inputdir, cellmarkfiletable, chromsizefile, binsize = 200,
-                         outputdir) {
+binarize_bed <- function(inputdir, cellmarkfiletable, chromsizefile,
+                         binsize = 200, outputdir) {
 
     # make a temporary directory when missing
     if (missing(outputdir)) {
@@ -297,12 +299,12 @@ binarize_bed <- function(inputdir, cellmarkfiletable, chromsizefile, binsize = 2
     }
 
     # call Binarize from R
-    Binarize(inputdir,
-             cellmarkfiletable,
-             chromsizefile,
-             binsize,
-             outputdir,
-             type = 'bed')
+    .Binarize(inputdir,
+              cellmarkfiletable,
+              chromsizefile,
+              binsize,
+              outputdir,
+              type = 'bed')
 }
 
 #' Make model file name
@@ -310,6 +312,9 @@ binarize_bed <- function(inputdir, cellmarkfiletable, chromsizefile, binsize = 2
 #' @param numstates An integer
 #'
 #' @return A string
+#'
+#' @examples
+#' model_file(3)
 #'
 #' @export
 model_file <- function(numstates) {
@@ -322,6 +327,9 @@ model_file <- function(numstates) {
 #'
 #' @return A string
 #'
+#' @examples
+#' emissions_file(3)
+#'
 #' @export
 emissions_file <- function(numstates) {
     paste0('emissions_', numstates, '.txt')
@@ -332,6 +340,9 @@ emissions_file <- function(numstates) {
 #' @param numstates An integer
 #'
 #' @return A string
+#'
+#' @examples
+#' transitions_file(3)
 #'
 #' @export
 transitions_file <- function(numstates) {
@@ -345,6 +356,9 @@ transitions_file <- function(numstates) {
 #'
 #' @return A character vector
 #'
+#' @examples
+#' overlap_files(3, 'K562')
+#'
 #' @export
 overlap_files <- function(numstates, cells) {
     paste(cells, numstates, 'overlap.txt', sep = '_')
@@ -356,6 +370,9 @@ overlap_files <- function(numstates, cells) {
 #' @param cells A character vector
 #'
 #' @return A character vector
+#'
+#' @examples
+#' segments_files(3, 'K562')
 #'
 #' @export
 segments_files <- function(numstates, cells) {
@@ -370,6 +387,9 @@ segments_files <- function(numstates, cells) {
 #' @param annotation A string
 #'
 #' @return A character vector
+#'
+#' @examples
+#' enrichment_files(3, 'K562')
 #'
 #' @export
 enrichment_files <- function(numstates, cells, table = 'RefSeq',

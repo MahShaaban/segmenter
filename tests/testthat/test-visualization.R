@@ -51,32 +51,3 @@ test_that("get_width works.", {
     expect_true(all(cells %in% wdth2$cell))
     expect_true(all(segs[[1]]$state %in% wdth2$state))
 })
-
-test_that("get_distance works.", {
-    numstates <- 3
-    cells <- c('K562', 'GM12878')
-
-    segs <- segment(test_obj)
-    expect_error(get_distance(segs))
-
-    library(TxDb.Hsapiens.UCSC.hg18.knownGene)
-
-    txdb <- TxDb.Hsapiens.UCSC.hg18.knownGene
-    annotated_segs <- annotate_segments(segs, TxDb = txdb, verbose = FALSE)
-
-    dist <- get_distance(annotated_segs)
-
-    expect_true(is.data.frame(dist))
-    expect_equal(ncol(dist), 3)
-    expect_equal(nrow(dist), sum(lengths(segs)))
-    expect_true(all(cells %in% dist$cell))
-    expect_true(all(segs[[1]]$state %in% dist$state))
-
-    dist2 <- get_width(annotated_segs, average = TRUE)
-
-    expect_true(is.data.frame(dist2))
-    expect_equal(ncol(dist2), 3)
-    expect_equal(nrow(dist2), numstates * length(cells))
-    expect_true(all(cells %in% dist2$cell))
-    expect_true(all(segs[[1]]$state %in% dist2$state))
-})

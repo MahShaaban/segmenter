@@ -15,3 +15,7 @@ A string
 \description{
 Make transitions file name
 }
+\examples{
+transitions_file(3)
+
+}

@@ -13,12 +13,12 @@ test_that("LearnModel works", {
                                   package = 'segmenter')
 
     expect_null(
-        LearnModel(inputdir = inputdir,
-                   outputdir = outputdir,
-                   coordsdir = coordsdir,
-                   anchorsdir = anchorsdir,
-                   chromsizefile = chromsizefile,
-                   numstates = 3,
-                   assembly = 'hg18')
+        .LearnModel(inputdir = inputdir,
+                    outputdir = outputdir,
+                    coordsdir = coordsdir,
+                    anchorsdir = anchorsdir,
+                    chromsizefile = chromsizefile,
+                    numstates = 3,
+                    assembly = 'hg18')
     )
 })

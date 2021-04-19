@@ -17,13 +17,8 @@
 #' @return \code{NULL}. Output files are written to the output directory.
 #'
 #' @seealso learn_model
-#'
-#' @export
-LearnModel <- function(inputdir, outputdir, numstates, coordsdir, anchorsdir,
+.LearnModel <- function(inputdir, outputdir, numstates, coordsdir, anchorsdir,
                        chromsizefile, assembly, optional) {
-    # target call
-    # java -jar ChromHMM/ChromHMM.jar LearnModel inputdir outputdir numstates assembly
-
     # locate LearnModel module
     LearnModel <- paste(
         system.file("extdata/ChromHMM",
@@ -81,14 +76,8 @@ LearnModel <- function(inputdir, outputdir, numstates, coordsdir, anchorsdir,
 #' @return \code{NULL}. Output files are written to the output directory.
 #'
 #' @seealso binarize_bed
-#'
-#' @export
-Binarize <- function(inputdir, cellmarkfiletable, chromsizefile, binsize,
+.Binarize <- function(inputdir, cellmarkfiletable, chromsizefile, binsize,
                      outputdir, type) {
-    # target call
-    # java -jar ChromHMM/ChromHMM.jar BinarizeBam -b binsize chromsizefile inputdir cellmarkfiletable outputdir
-    # or, java -jar ChromHMM/ChromHMM.jar BinarizeBed -b binsize chromsizefile inputdir cellmarkfiletable outputdir
-
     # locate module
     type <- switch (type,
                     'bam' = 'BinarizeBam',

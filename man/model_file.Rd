@@ -15,3 +15,7 @@ A string
 \description{
 Make model file name
 }
+\examples{
+model_file(3)
+
+}

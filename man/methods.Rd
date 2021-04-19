@@ -10,9 +10,16 @@
 \arguments{
 \item{object}{An object of class \code{segmentation}}
 }
+\value{
+Prints a summary of the \code{segmentation} object contents.
+}
 \description{
 These functions can be used to interact with \code{segmentation} objects for
 purposes other than accessing or modifying their contents.
+}
+\examples{
+show(test_obj)
+
 }
 \seealso{
 segmentation

@@ -5,34 +5,39 @@
 #' data is optional. The object is returned as a result of calling
 #' \code{\link{learn_model}} or reading its already existing output.
 #'
-#' @slot model list. The \code{list} consists of 6 items corresponding to the
-#' contents of the \code{model_#.txt} file. These are \code{number_states} and
-#' \code{number_marks} for the numbers of states and marks in the model;
-#' \code{likelihood} and \code{probinit} for the likelihood and the initial
-#' probabilities of the multi-state model; \code{transitionprobs} and
-#' \code{emissionprobs} for the probabilities of the transitions and emissions
-#' parameters of the model. Can be accessed using \code{\link{model}}
-#' @slot emission matrix. The \code{matrix} contains the emission parameters of
-#' n states (rows) for n marks (columns) corresponding to the contents of the
-#' \code{emission_#.txt} file. Can be accessed using \code{\link{emission}}.
-#' @slot transition matrix. The \code{matrix} contains the transition parameters
-#' of n by n states corresponding to the contents of the \code{transition_#.txt}
-#' file. Can be accessed using \code{\link{transition}}.
+#' @slot model list. The \code{list} consists of 6 items corresponding
+#' to the contents of the \code{model_#.txt} file. These are
+#' \code{number_states} and \code{number_marks} for the numbers of states
+#' and marks in the model; \code{likelihood} and \code{probinit} for the
+#' likelihood and the initial probabilities of the multi-state model;
+#' \code{transitionprobs} and \code{emissionprobs} for the probabilities
+#' of the transitions and emissions parameters of the model. Can be
+#' accessed using \code{\link{model}}.
+#' @slot emission matrix. The \code{matrix} contains the emission
+#' parameters of n states (rows) for n marks (columns) corresponding to
+#' the contents of the \code{emission_#.txt} file. Can be accessed using
+#' \code{\link{emission}}.
+#' @slot transition matrix. The \code{matrix} contains the transition
+#' parameters of n by n states corresponding to the contents of the
+#' \code{transition_#.txt} file. Can be accessed using
+#' \code{\link{transition}}.
 #' @slot overlap list. A \code{list} of n number of cells/conditions items.
-#' Each item is a \code{matrix} of the overlap enrichment of n states (rows) at
-#' n genomic annotations (columns) corresponding to the contents of the
-#' \code{<cell>_#_overlap.txt} files. Can be accessed using
+#' Each item is a \code{matrix} of the overlap enrichment of n states
+#' (rows) at n genomic annotations (columns) corresponding to the contents
+#' of the \code{<cell>_#_overlap.txt} files. Can be accessed using
 #' \code{\link{overlap}}.
 #' @slot TSS list. A \code{list} of n number of cells/conditions items.
-#' Each item is a \code{matrix} of the overlap enrichment of n states (rows) at
-#' n locations around the transcription start site (TSS) (columns)
-#' corresponding to the contents of the \code{<cell>_#_TSS_neighborhood.txt}
-#' files. Can be accessed using \code{\link{TSS}}.
+#' Each item is a \code{matrix} of the overlap enrichment of n states
+#' (rows) at n locations around the transcription start site (TSS)
+#' (columns) corresponding to the contents of the
+#' \code{<cell>_#_TSS_neighborhood.txt} files. Can be accessed using
+#' \code{\link{TSS}}.
 #' @slot TES list. A \code{list} of n number of cells/conditions items.
-#' Each item is a \code{matrix} of the overlap enrichment of n states (rows) at
-#' n locations around the transcription end site (TES) (columns)
-#' corresponding to the contents of the \code{<cell>_#_TES_neighborhood.txt}
-#' files. Can be accessed using \code{\link{TES}}.
+#' Each item is a \code{matrix} of the overlap enrichment of n states
+#' (rows) at n locations around the transcription end site (TES)
+#' (columns) corresponding to the contents of the
+#' \code{<cell>_#_TES_neighborhood.txt} files. Can be accessed using
+#' \code{\link{TES}}.
 #' @slot segment list. A \code{list} of n number of cells/conditions items.
 #' Each item is a \code{\link[GenomicRanges]{GRanges}} object containing the
 #' segmentation and assigned states as a metadata column 'state'. These
@@ -80,12 +85,18 @@ setClass('segmentation',
 #' @param cell A string
 #' @param ... Other argument passed to the accessors
 #'
+#' @return The data in the corresponding slot or a subset of it.
+#'
 #' @seealso segmentation
 #'
 #' @name accessors
 NULL
 
 #' @rdname accessors
+#'
+#' @examples
+#' model(test_obj)
+#'
 #' @export
 setGeneric('model', function(object) standardGeneric('model'))
 
@@ -93,6 +104,10 @@ setGeneric('model', function(object) standardGeneric('model'))
 setMethod('model', 'segmentation', function(object) object@model)
 
 #' @rdname accessors
+#'
+#' @examples
+#' emission(test_obj)
+#'
 #' @export
 setGeneric('emission', function(object) standardGeneric('emission'))
 
@@ -100,6 +115,10 @@ setGeneric('emission', function(object) standardGeneric('emission'))
 setMethod('emission', 'segmentation', function(object) object@emission)
 
 #' @rdname accessors
+#'
+#' @examples
+#' transition(test_obj)
+#'
 #' @export
 setGeneric('transition', function(object) standardGeneric('transition'))
 
@@ -107,6 +126,11 @@ setGeneric('transition', function(object) standardGeneric('transition'))
 setMethod('transition', 'segmentation', function(object) object@transition)
 
 #' @rdname accessors
+#'
+#' @examples
+#' overlap(test_obj)
+#' overlap(test_obj, cell = 'K562')
+#'
 #' @export
 setGeneric('overlap', function(object, ...) standardGeneric('overlap'))
 
@@ -124,6 +148,11 @@ setMethod('overlap',
           })
 
 #' @rdname accessors
+#'
+#' @examples
+#' TSS(test_obj)
+#' TSS(test_obj, cell = 'K562')
+#'
 #' @export
 setGeneric('TSS', function(object, ...) standardGeneric('TSS'))
 
@@ -141,6 +170,11 @@ setMethod('TSS',
           })
 
 #' @rdname accessors
+#'
+#' @examples
+#' TES(test_obj)
+#' TES(test_obj, cell = 'K562')
+#'
 #' @export
 setGeneric('TES', function(object, ...) standardGeneric('TES'))
 
@@ -158,6 +192,11 @@ setMethod('TES',
           })
 
 #' @rdname accessors
+#'
+#' @examples
+#' segment(test_obj)
+#' segment(test_obj, cell = 'K562')
+#'
 #' @export
 setGeneric('segment', function(object, ...) standardGeneric('segment'))
 
@@ -175,6 +214,10 @@ setMethod('segment',
           })
 
 #' @rdname accessors
+#'
+#' @examples
+#' bins(test_obj)
+#'
 #' @export
 setGeneric('bins', function(object, ...) standardGeneric('bins'))
 
@@ -192,6 +235,10 @@ setMethod('bins',
           })
 
 #' @rdname accessors
+#'
+#' @examples
+#' counts(test_obj)
+#'
 #' @export
 setGeneric('counts', function(object, ...) standardGeneric('counts'))
 
@@ -209,6 +256,10 @@ setMethod('counts',
           })
 
 #' @rdname accessors
+#'
+#' @examples
+#' likelihood(test_obj)
+#'
 #' @export
 setGeneric('likelihood', function(object) standardGeneric('likelihood'))
 
@@ -218,6 +269,10 @@ setMethod('likelihood', 'segmentation', function(object) {
 })
 
 #' @rdname accessors
+#'
+#' @examples
+#' cells(test_obj)
+#'
 #' @export
 setGeneric('cells', function(object) standardGeneric('cells'))
 
@@ -229,6 +284,10 @@ setMethod('cells',
           })
 
 #' @rdname accessors
+#'
+#' @examples
+#' states(test_obj)
+#'
 #' @export
 setGeneric('states', function(object) standardGeneric('states'))
 
@@ -247,6 +306,10 @@ setMethod('states',
           })
 
 #' @rdname accessors
+#'
+#' @examples
+#' markers(test_obj)
+#'
 #' @export
 setGeneric('markers', function(object) standardGeneric('markers'))
 
@@ -264,6 +327,8 @@ setMethod('markers',
 #'
 #' @param object An object of class \code{segmentation}
 #'
+#' @return Prints a summary of the \code{segmentation} object contents.
+#'
 #' @seealso segmentation
 #' @seealso accessors
 #'
@@ -271,6 +336,10 @@ setMethod('markers',
 NULL
 
 #' @rdname methods
+#'
+#' @examples
+#' show(test_obj)
+#'
 #' @export
 setMethod(
     'show',
@@ -281,8 +350,8 @@ setMethod(
 
         # describe information contents
         cat("# Contains a chromatin segmentation model:", "\n", sep = "")
-        cat("## States: ", paste(states(object), collapse = ' '), "\n", sep = "")
-        cat("## Marks: ", paste(markers(object), collapse = ' '), "\n", sep = "")
+        cat("## States: ", paste(states(object), collapse = ' '),"\n", sep = "")
+        cat("## Marks: ", paste(markers(object), collapse = ' '),"\n", sep = "")
         cat("## Cells: ", paste(cells(object), collapse = ' '), "\n", sep = "")
 
         # describe slots and accessors

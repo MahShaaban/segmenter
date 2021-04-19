@@ -17,3 +17,7 @@ A character vector
 \description{
 Make segments file names
 }
+\examples{
+segments_files(3, 'K562')
+
+}

@@ -9,6 +9,12 @@
 #' @return A \code{GRanges} object which is identical to the input in addition
 #' to the annotations as metadata columns.
 #'
+#' @examples
+#' library(TxDb.Hsapiens.UCSC.hg18.knownGene)
+#' txdb <- TxDb.Hsapiens.UCSC.hg18.knownGene
+#' segs <- segment(test_obj)
+#' segs_annotated <- annotate_segments(segs, TxDb = txdb, verbose = FALSE)
+#'
 #' @importFrom ChIPseeker annotatePeak as.GRanges
 #'
 #' @export
@@ -34,6 +40,10 @@ annotate_segments <- function(segments, ...) {
 #' @param ... Other arguments passed to barplot
 #'
 #' @return A \code{data.frame} when tidy is TRUE otherwise a matrix or a plot
+#'
+#' @examples
+#' get_frequency(segment(test_obj))
+#' get_frequency(segment(test_obj), normalize = TRUE)
 #'
 #' @importFrom graphics barplot
 #'
@@ -61,7 +71,7 @@ get_frequency <- function(segments, normalize = FALSE, tidy = FALSE,
     res <- do.call(rbind, freqs)
 
     # add cells columns and remove row names
-    res$cell <- rep(names(segments), sapply(freqs, nrow))
+    res$cell <- rep(names(segments), vapply(freqs, nrow, numeric(1)))
     rownames(res) <- NULL
 
     # return
@@ -83,6 +93,10 @@ get_frequency <- function(segments, normalize = FALSE, tidy = FALSE,
 #' @param average A logical. Whether the width should be averaged across cells.
 #'
 #' @return A \code{data.frame}
+#'
+#' @examples
+#' get_width(segment(test_obj))
+#' get_width(segment(test_obj), average = TRUE)
 #'
 #' @importFrom GenomicRanges width
 #'
@@ -114,87 +128,11 @@ get_width <- function(segments, average = FALSE) {
     res <- do.call(rbind, wdth)
 
     # add cells columns and remove row names
-    res$cell <- rep(names(segments), sapply(wdth, nrow))
+    res$cell <- rep(names(segments), vapply(wdth, nrow, numeric(1)))
     rownames(res) <- NULL
 
     # return
     return(res)
-}
-
-#' Get the distances of the segments to the TSS in each cell type
-#'
-#' @inheritParams annotate_segments
-#' @param average A logical. Whether the width should be averaged across cells.
-#'
-#' @return A \code{data.frame}
-#'
-#' @importFrom GenomicRanges mcols
-#'
-#' @export
-get_distance <- function(segments, average = FALSE) {
-    # get distance of each state in each cell
-    dist <- lapply(segments, function(x) {
-        # stop if not annotated properly
-        stopifnot('distanceToTSS' %in% names(mcols(x)))
-
-        # continue if present
-        df <- data.frame(
-            state = x$state,
-            distance = x$distanceToTSS
-        )
-
-        # average if true
-        if (average) {
-            # calculate the mean and round up to nearst integer
-            df <- aggregate(df$distanceToTSS,
-                            by = list(state = df$state),
-                            FUN = function(x) round(mean(x)))
-        }
-
-        # return
-        df
-    })
-
-    # bind rows
-    res <- do.call(rbind, dist)
-
-    # add cells columns and remove row names
-    res$cell <- rep(names(segments), sapply(dist, nrow))
-    rownames(res) <- NULL
-
-    # return
-    return(res)
-}
-
-#' Extract binariezed data for a GRange
-#'
-#' @param bins A SummarizedExperiment object
-#' @param which A GRanges object
-#' @param tidy A logical
-#'
-#' @return A GRanges object
-#'
-#' @importFrom GenomicRanges findOverlaps
-#' @importFrom S4Vectors values subjectHits
-#' @importFrom SummarizedExperiment assay rowRanges
-#'
-#' @export
-extract_bins <- function(bins, which, tidy = FALSE) {
-    # find overlaps between the selected range and row ranges of se
-    ol <- findOverlaps(which, rowRanges(bins))
-
-    # subset the se object
-    hits <- bins[subjectHits(ol)]
-
-    # extract ranges
-    gr <- rowRanges(hits)
-
-    # add assay data as metadata to ranges
-    values(gr) <- cbind(values(gr), as.data.frame(assay(hits)))
-
-    # tidy if true
-    if (tidy) tidy_ranges(gr, columns = colnames(hits))
-    else gr
 }
 
 #' Compare two or more models
@@ -205,6 +143,10 @@ extract_bins <- function(bins, which, tidy = FALSE) {
 #' @param ... Other arguments passed to plot
 #'
 #' @return A numeric vector or a plot with the same values.
+#'
+#' @examples
+#' compare_models(test_objs)
+#' compare_models(test_objs, type = 'likelihood')
 #'
 #' @importFrom stats cor
 #'
@@ -244,6 +186,9 @@ compare_models <- function(objs, type = 'emission', plot = FALSE, ...) {
 #' @param ... Other arguments to path to Heatmap
 #'
 #' @return A heatmap
+#'
+#' @examples
+#' plot_heatmap(test_obj)
 #'
 #' @importFrom ComplexHeatmap Heatmap HeatmapList add_heatmap
 #'

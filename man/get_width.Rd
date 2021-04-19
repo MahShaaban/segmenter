@@ -18,3 +18,8 @@ A \code{data.frame}
 \description{
 Get the width of the segments in each cell type
 }
+\examples{
+get_width(segment(test_obj))
+get_width(segment(test_obj), average = TRUE)
+
+}

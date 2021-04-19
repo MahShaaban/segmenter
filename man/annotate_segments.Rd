@@ -20,3 +20,10 @@ to the annotations as metadata columns.
 Annotate the \code{GRanges} objects of the segments using
 \code{\link[ChIPseeker]{annotatePeak}} (see for details)
 }
+\examples{
+library(TxDb.Hsapiens.UCSC.hg18.knownGene)
+txdb <- TxDb.Hsapiens.UCSC.hg18.knownGene
+segs <- segment(test_obj)
+segs_annotated <- annotate_segments(segs, TxDb = txdb, verbose = FALSE)
+
+}

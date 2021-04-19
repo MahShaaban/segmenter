@@ -21,3 +21,7 @@ A character vector
 \description{
 Make enrichment file names
 }
+\examples{
+enrichment_files(3, 'K562')
+
+}

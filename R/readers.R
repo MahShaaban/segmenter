@@ -373,7 +373,9 @@ read_cellmark_file <- function(file) {
 #' bam_file <- system.file("extdata", "randomBam.bam", package = "bamsignals")
 #'
 #' # load a granges object
-#' rand_anno <- system.file("extdata", "randomAnnot.Rdata", package = "bamsignals")
+#' rand_anno <- system.file("extdata",
+#'                          "randomAnnot.Rdata",
+#'                          package = "bamsignals")
 #' features <- GenomicRanges::promoters(get(load(rand_anno)))
 #'
 #' # count reads in ranges

@@ -15,3 +15,7 @@ A string
 \description{
 Make emissions file name
 }
+\examples{
+emissions_file(3)
+
+}

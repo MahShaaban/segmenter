@@ -25,3 +25,8 @@ A \code{data.frame} when tidy is TRUE otherwise a matrix or a plot
 \description{
 Get the frequency of the segments in each cell type
 }
+\examples{
+get_frequency(segment(test_obj))
+get_frequency(segment(test_obj), normalize = TRUE)
+
+}

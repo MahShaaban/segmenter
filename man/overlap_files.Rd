@@ -17,3 +17,7 @@ A character vector
 \description{
 Make overlap file names
 }
+\examples{
+overlap_files(3, 'K562')
+
+}

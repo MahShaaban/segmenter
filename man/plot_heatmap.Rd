@@ -20,3 +20,7 @@ A heatmap
 \description{
 Visualize the model output
 }
+\examples{
+plot_heatmap(test_obj)
+
+}

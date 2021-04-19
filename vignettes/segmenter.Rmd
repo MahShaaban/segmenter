@@ -23,11 +23,12 @@ to predict the chromatin's underlying (hidden) states. *ChromHMM*, written in
 *Java*, integrates histone modification datasets to learn the chromatin states
 de-novo. We developed an *R* package around this program to leverage the
 existing *R/Bioconductor* tools and data structures in the segmentation analysis
-context. `segmenter` wraps the *Java* modules to call *ChromHMM* and captures the
-output in an `S4` object. This allows for iterating with different parameters,
-which are given in *R* syntax. Capturing the output in *R* makes it easier to
-work with the results and to integrate them in downstream analyses. Finally, 
-`segmenter` provides additional tools to test, select and visualize the models.
+context. `segmenter` wraps the *Java* modules to call *ChromHMM* and captures 
+the output in an `S4` object. This allows for iterating with different 
+parameters, which are given in *R* syntax. Capturing the output in *R* makes it
+easier to work with the results and to integrate them in downstream analyses.
+Finally, `segmenter` provides additional tools to test, select and visualize the
+models.
 
 # Installation
 
@@ -75,8 +76,8 @@ The goal of the `segmenter` package is to
 
 # Getting started
 
-This is a quick example of using `segmenter` to call the Java modules and will be
-followed by a detailed description in the following sections.
+This is a quick example of using `segmenter` to call the Java modules and will
+be followed by a detailed description in the following sections.
 
 First, we need to load the package
 
@@ -248,12 +249,12 @@ list.files(inputdir)
 
 ## Model learning
 
-The main function in `segmenter` is called `learn_model`. This wraps the the Java
-module that learns a chromatin segmentation model of a given number of states.
-In addition to the input files explained before the function takes the desired
-number of stats, `numstates` and the information that were used to generate the
-binarized files. Those are the names of the genome `assembly`, the type of 
-`annotation`, the `binsize` and the names of `cells` or conditions.
+The main function in `segmenter` is called `learn_model`. This wraps the the 
+Java module that learns a chromatin segmentation model of a given number of 
+states. In addition to the input files explained before, the function takes the
+desired number of stats, `numstates` and the information that were used to 
+generate the binarized files. Those are the names of the genome `assembly`, the
+type of `annotation`, the `binsize` and the names of `cells` or conditions.
 
 ```{r run_command, eval=FALSE}
 # run command
@@ -539,7 +540,7 @@ Other tracks can be added to the plot to make it more informative. Here, we used
 
 - `IdeogramTrack` to show a graphic representation of chromosome 11
 - `GenomeAxisTrack` to show a scale of the exact location on the chromosome
-- `GeneRegionTrack` to show the exson, intron and transcripts of the target gene
+- `GeneRegionTrack` to show the exon, intron and transcripts of the target gene
 
 Those can be put together in one plot using `plotTracks`
 
