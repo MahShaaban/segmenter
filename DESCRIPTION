@@ -1,0 +1,41 @@
+Package: segmenter
+Type: Package
+Title: Perform Chromatin Segmentation Analysis in R by Calling ChromHMM
+Version: 0.99.0
+Description: Chromatin segmentation analysis transforms ChIP-seq data into 
+    signals over the genome. The latter represents the observed states in a 
+    multivariate Markov model to predict the chromatin's underlying states.
+    ChromHMM, written in Java, integrates histone modification datasets to learn
+    the chromatin states de-novo. The goal of this package is to call chromHMM 
+    from within R, capture the output files in an S4 object and interface to 
+    other relevant Bioconductor analysis tools. In addition, segmenter provides 
+    functions to test, select and visualize the output of the segmentation.
+Authors@R: person("Mahmoud", "Ahmed",
+                  email = "mahmoud.s.fahmy@students.kasralainy.edu.eg",
+                  role = c("aut", "cre"),
+                  comment = c(ORCID = "0000-0002-4377-6541"))
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+Depends: R (>= 4.0)
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown,
+    TxDb.Hsapiens.UCSC.hg18.knownGene,
+    Gviz
+Imports: 
+    ChIPseeker,
+    GenomicRanges,
+    SummarizedExperiment,
+    IRanges,
+    S4Vectors,
+    bamsignals,
+    ComplexHeatmap,
+    graphics, 
+    stats, 
+    utils
+VignetteBuilder: knitr
+biocViews: Software,
+    HistoneModification
