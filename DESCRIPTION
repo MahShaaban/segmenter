@@ -1,7 +1,7 @@
 Package: segmenter
 Type: Package
 Title: Perform Chromatin Segmentation Analysis in R by Calling ChromHMM
-Version: 0.99.1
+Version: 0.99.2
 Description: Chromatin segmentation analysis transforms ChIP-seq data into 
     signals over the genome. The latter represents the observed states in a 
     multivariate Markov model to predict the chromatin's underlying states.
@@ -38,3 +38,5 @@ Imports:
 VignetteBuilder: knitr
 biocViews: Software,
     HistoneModification
+LazyData: true
+
