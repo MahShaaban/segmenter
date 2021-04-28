@@ -18,9 +18,9 @@ chromosome and the other for its length.
 }
 \examples{
 # locate the file
-chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+chromsizefile <- system.file('extdata/CHROMSIZES',
                              'hg18.txt',
-                             package = 'segmenter')
+                             package = 'chromhmmData')
 
 # read the file
 read_chromsize_file(chromsizefile)

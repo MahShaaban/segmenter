@@ -22,9 +22,7 @@ The segments files are the output of running \code{learn_model} and named
 }
 \examples{
 # locate the file
-fl <- system.file('extdata/output',
-                  'GM12878_3_overlap.txt',
-                  package = 'segmenter')
+fl <- file.path(tempdir(), 'GM12878_3_overlap.txt')
 
 # read the file
 read_overlap_file(fl)

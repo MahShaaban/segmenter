@@ -21,7 +21,7 @@
                        chromsizefile, assembly, optional) {
     # locate LearnModel module
     LearnModel <- paste(
-        system.file("extdata/ChromHMM",
+        system.file("java",
                     "ChromHMM.jar",
                     package = "segmenter"),
         "LearnModel"
@@ -70,7 +70,7 @@
 #' @param chromsizefile A string. The path to the chromosomes sizes file.
 #' @param cellmarkfiletable A tab delimited files of three columns.
 #' The columns contains the cell, mark and the name or the bed file.
-#' @param binsize An integer. The bin size to use. Defualut is 200.
+#' @param binsize An integer. The bin size to use. Default is 200.
 #' @param type A string. The file type 'bam' or 'bed'.
 #'
 #' @return \code{NULL}. Output files are written to the output directory.
@@ -83,7 +83,7 @@
                     'bam' = 'BinarizeBam',
                     'bed' = 'BinarizeBed')
     module <- paste(
-        system.file("extdata/ChromHMM",
+        system.file("java",
                     "ChromHMM.jar",
                     package = "segmenter"),
         type

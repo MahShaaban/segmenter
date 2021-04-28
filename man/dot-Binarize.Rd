@@ -14,7 +14,7 @@ The columns contains the cell, mark and the name or the bed file.}
 
 \item{chromsizefile}{A string. The path to the chromosomes sizes file.}
 
-\item{binsize}{An integer. The bin size to use. Defualut is 200.}
+\item{binsize}{An integer. The bin size to use. Default is 200.}
 
 \item{outputdir}{A string. The path to a directory where output will be
 written.}

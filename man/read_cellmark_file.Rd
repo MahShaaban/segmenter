@@ -18,7 +18,7 @@ names of the cells/conditions, the available marks and binarized data files.
 }
 \examples{
 # locate the file
-fl <- system.file('extdata/input',
+fl <- system.file('extdata',
                   'cell_mark_table.tsv',
                   package = 'segmenter')
 

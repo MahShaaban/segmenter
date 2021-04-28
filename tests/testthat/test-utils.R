@@ -1,12 +1,12 @@
 context("Test Utils")
 
 test_that("tidy_ranges works.", {
-    binfile <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18/',
+    binfile <- system.file('extdata/SAMPLEDATA_HG18/',
                            'K562_chr11_binary.txt.gz',
                            package = 'segmenter')
-    chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+    chromsizefile <- system.file('extdata/CHROMSIZES',
                                  'hg18.txt',
-                                 package = 'segmenter')
+                                 package = 'chromhmmData')
 
     bins <- read_bins_file(binfile)
     gr <- range_bins(list(bins), chromsizefile, 200, tidy = FALSE)
@@ -24,12 +24,12 @@ test_that("tidy_ranges works.", {
 })
 
 test_that("range_bins works.", {
-    binfile <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18/',
+    binfile <- system.file('extdata/SAMPLEDATA_HG18/',
                            'K562_chr11_binary.txt.gz',
                            package = 'segmenter')
-    chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+    chromsizefile <- system.file('extdata/CHROMSIZES',
                                  'hg18.txt',
-                                 package = 'segmenter')
+                                 package = 'chromhmmData')
 
     bins <- read_bins_file(binfile)
     gr <- range_bins(list(bins), chromsizefile, 200, tidy = FALSE)
@@ -95,7 +95,7 @@ test_that("range_counts works.", {
 test_that("count_reads_ranges works.", {
     inputbamdir <- system.file("extdata", package="bamsignals")
 
-    cellmarkfiletable <- system.file('extdata/input',
+    cellmarkfiletable <- system.file('extdata',
                                      'cell_mark_table.tsv',
                                      package = 'segmenter')
 
@@ -113,16 +113,16 @@ test_that("count_reads_ranges works.", {
 })
 
 test_that("merge_segments_bins works.", {
-    inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
+    inputdir <- system.file('extdata/SAMPLEDATA_HG18',
                             package = 'segmenter')
     outputdir <- tempdir()
-    coordsdir <- system.file('extdata/ChromHMM/COORDS',
-                             package = 'segmenter')
-    anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
-                              package = 'segmenter')
-    chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+    coordsdir <- system.file('extdata/COORDS',
+                             package = 'chromhmmData')
+    anchorsdir <- system.file('extdata/ANCHORFILES',
+                              package = 'chromhmmData')
+    chromsizefile <- system.file('extdata/CHROMSIZES',
                                  'hg18.txt',
-                                 package = 'segmenter')
+                                 package = 'chromhmmData')
     obj <- learn_model(inputdir = inputdir,
                        outputdir = outputdir,
                        coordsdir = coordsdir,

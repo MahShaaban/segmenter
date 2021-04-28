@@ -1,19 +1,38 @@
 context("Test Readers")
 
 test_that("read_chromsize_file works", {
-    chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+    chromsizefile <- system.file('extdata/CHROMSIZES',
                                  'hg18.txt',
-                                 package = 'segmenter')
+                                 package = 'chromhmmData')
     res <- read_chromsize_file(chromsizefile)
     expect_true(is.data.frame(res))
     expect_true(is.character(res$seqname))
     expect_true(is.numeric(res$width))
 })
 
+inputdir <- system.file('extdata/SAMPLEDATA_HG18',
+                        package = 'segmenter')
+outputdir <- tempdir()
+coordsdir <- system.file('extdata/COORDS',
+                         package = 'chromhmmData')
+anchorsdir <- system.file('extdata/ANCHORFILES',
+                          package = 'chromhmmData')
+chromsizefile <- system.file('extdata/CHROMSIZES',
+                             'hg18.txt',
+                             package = 'chromhmmData')
+obj <- learn_model(inputdir = inputdir,
+                   outputdir = outputdir,
+                   coordsdir = coordsdir,
+                   anchorsdir = anchorsdir,
+                   chromsizefile = chromsizefile,
+                   numstates = 3,
+                   assembly = 'hg18',
+                   cells = c('K562', 'GM12878'),
+                   annotation = 'RefSeq',
+                   binsize = 200)
+
 test_that("read_segements_file works", {
-    segmentfile <- system.file('extdata/output',
-                                 'GM12878_3_segments.bed',
-                                 package = 'segmenter')
+    segmentfile <- file.path(outputdir, 'GM12878_3_segments.bed')
     res <- read_segements_file(segmentfile)
 
     expect_true(is.data.frame(res))
@@ -29,9 +48,7 @@ test_that("read_segements_file works", {
 })
 
 test_that("read_emissions_file works", {
-    fl <- system.file('extdata/output',
-                      'emissions_3.txt',
-                      package = 'segmenter')
+    fl <- file.path(outputdir, 'emissions_3.txt') 
 
     res <- read_emissions_file(fl)
     states <- paste0('S', seq_len(nrow(res)))
@@ -50,10 +67,8 @@ test_that("read_emissions_file works", {
 })
 
 test_that("read_transitions_file works", {
-    fl <- system.file('extdata/output',
-                      'transitions_3.txt',
-                      package = 'segmenter')
-
+    fl <- file.path(outputdir, 'transitions_3.txt') 
+    
     res <- read_transitions_file(fl)
     states <- paste0('S', seq_len(nrow(res)))
 
@@ -70,9 +85,7 @@ test_that("read_transitions_file works", {
 })
 
 test_that("read_overlap_file works", {
-    fl <- system.file('extdata/output',
-                      'GM12878_3_overlap.txt',
-                      package = 'segmenter')
+    fl <- file.path(outputdir, 'GM12878_3_overlap.txt')
 
     res <- read_overlap_file(fl)
     states <- paste0('S', seq_len(nrow(res)))
@@ -91,9 +104,7 @@ test_that("read_overlap_file works", {
 })
 
 test_that("read_enrichment_file works", {
-    fl <- system.file('extdata/output',
-                      'GM12878_3_RefSeqTSS_neighborhood.txt',
-                      package = 'segmenter')
+    fl <- file.path(outputdir, 'GM12878_3_RefSeqTSS_neighborhood.txt')
 
     res <- read_enrichment_file(fl)
     states <- paste0('S', seq_len(nrow(res)))
@@ -112,16 +123,15 @@ test_that("read_enrichment_file works", {
 })
 
 test_that("read_model_file works.", {
-    fl <- system.file('extdata/output',
-                      'model_3.txt',
-                      package = 'segmenter')
+    fl <- file.path(outputdir, 'model_3.txt')
+
     res <- read_model_file(fl)
 
     expect_true(is.list(res))
 })
 
 test_that("read_model_file works.", {
-    fl <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18/',
+    fl <- system.file('extdata/SAMPLEDATA_HG18/',
                       'GM12878_chr11_binary.txt.gz',
                       package = 'segmenter')
     res <- read_bins_file(fl)
@@ -133,7 +143,7 @@ test_that("read_model_file works.", {
 })
 
 test_that("read_cellmark_file works.", {
-    fl <- system.file('extdata/input',
+    fl <- system.file('extdata',
                       'cell_mark_table.tsv',
                       package = 'segmenter')
 

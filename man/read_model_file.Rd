@@ -18,9 +18,7 @@ The model file is the output of running \code{learn_model} and named
 }
 \examples{
 # locate the file
-modelfile <- system.file('extdata/output',
-                         'model_3.txt',
-                         package = 'segmenter')
+modelfile <- file.path(tempdir(), 'model_3.txt')
 
 # read the file
 read_model_file(modelfile)

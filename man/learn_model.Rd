@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrappers.R
 \name{learn_model}
 \alias{learn_model}
-\title{Lean a multi-state model from chromatin data}
+\title{Learn a multi-state model from chromatin data}
 \usage{
 learn_model(
   inputdir,
@@ -30,7 +30,7 @@ written.}
 
 \item{numstates}{An integer. The number of desired states in the model.}
 
-\item{coordsdir}{A string. The path to genomic coordiantes files.}
+\item{coordsdir}{A string. The path to genomic coordinates files.}
 
 \item{anchorsdir}{A string. The path to the genomic anchors files.}
 
@@ -68,7 +68,7 @@ and the files written to the output directory.
 \description{
 Integrate multiple ChIP-seq chromatin datasets of histone modifications,
 transcription factors or other DNA binding proteins to build a multi-state
-model of the combinatorial and spatial frequently occuring patterns.
+model of the combinatorial and spatial frequently occurring patterns.
 The function uses as an input binarized ChIP-seq data and the genome
 annotations on which the states will be discovered.
 }
@@ -82,16 +82,16 @@ directory and load them without rerunning the commands.
 }
 \examples{
 # locate input and output files
-inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
+inputdir <- system.file('extdata/SAMPLEDATA_HG18',
                         package = 'segmenter')
 outputdir <- tempdir()
-coordsdir <- system.file('extdata/ChromHMM/COORDS',
-                         package = 'segmenter')
-anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
-                          package = 'segmenter')
-chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+coordsdir <- system.file('extdata/COORDS',
+                         package = 'chromhmmData')
+anchorsdir <- system.file('extdata/ANCHORFILES',
+                          package = 'chromhmmData')
+chromsizefile <- system.file('extdata/CHROMSIZES',
                              'hg18.txt',
-                             package = 'segmenter')
+                             package = 'chromhmmData')
 
 # run command
 obj <- learn_model(inputdir = inputdir,

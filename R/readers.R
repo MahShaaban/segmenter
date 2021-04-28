@@ -9,9 +9,9 @@
 #'
 #' @examples
 #' # locate the file
-#' chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+#' chromsizefile <- system.file('extdata/CHROMSIZES',
 #'                              'hg18.txt',
-#'                              package = 'segmenter')
+#'                              package = 'chromhmmData')
 #'
 #' # read the file
 #' read_chromsize_file(chromsizefile)
@@ -44,9 +44,7 @@ read_chromsize_file <- function(file) {
 #'
 #' @examples
 #' # locate the file
-#' segmentfile <- system.file('extdata/output',
-#'                            'GM12878_3_segments.bed',
-#'                            package = 'segmenter')
+#' segmentfile <- file.path(tempdir(), 'GM12878_3_segments.bed')
 #'
 #' # read the file
 #' segs <- read_segements_file(segmentfile)
@@ -89,9 +87,7 @@ read_segements_file <- function(file, states) {
 #'
 #' @examples
 #' # locate the file
-#' modelfile <- system.file('extdata/output',
-#'                          'model_3.txt',
-#'                          package = 'segmenter')
+#' modelfile <- file.path(tempdir(), 'model_3.txt')
 #'
 #' # read the file
 #' read_model_file(modelfile)
@@ -146,9 +142,7 @@ read_model_file <- function(file) {
 #'
 #' @examples
 #' # locate the file
-#' fl <- system.file('extdata/output',
-#'                            'emissions_3.txt',
-#'                            package = 'segmenter')
+#' fl <- file.path(tempdir(), 'emissions_3.txt')
 #'
 #' # read the file
 #' read_emissions_file(fl)
@@ -182,10 +176,8 @@ read_emissions_file <- function(file, states, marks) {
 #'
 #' @examples
 #' # locate the file
-#' fl <- system.file('extdata/output',
-#'                            'transitions_3.txt',
-#'                            package = 'segmenter')
-#'
+#' fl <- file.path(tempdir(), 'transitions_3.txt')
+#' 
 #' # read the file
 #' read_transitions_file(fl)
 #'
@@ -219,10 +211,8 @@ read_transitions_file <- function(file, states) {
 #'
 #' @examples
 #' # locate the file
-#' fl <- system.file('extdata/output',
-#'                   'GM12878_3_overlap.txt',
-#'                   package = 'segmenter')
-#'
+#' fl <- file.path(tempdir(), 'GM12878_3_overlap.txt')
+#' 
 #' # read the file
 #' read_overlap_file(fl)
 #'
@@ -256,9 +246,7 @@ read_overlap_file <- function(file, states, regions) {
 #'
 #' @examples
 #' # locate the file
-#' fl <- system.file('extdata/output',
-#'                   'GM12878_3_RefSeqTSS_neighborhood.txt',
-#'                   package = 'segmenter')
+#' fl <- file.path(tempdir(), 'GM12878_3_RefSeqTSS_neighborhood.txt')
 #'
 #' # read the file
 #' read_enrichment_file(fl)
@@ -291,7 +279,7 @@ read_enrichment_file <- function(file, states, regions) {
 #'
 #' @examples
 #' # locate the file
-#' fl <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18/',
+#' fl <- system.file('extdata/SAMPLEDATA_HG18/',
 #'                   'GM12878_chr11_binary.txt.gz',
 #'                   package = 'segmenter')
 #'
@@ -331,7 +319,7 @@ read_bins_file <- function(file) {
 #'
 #' @examples
 #' # locate the file
-#' fl <- system.file('extdata/input',
+#' fl <- system.file('extdata',
 #'                   'cell_mark_table.tsv',
 #'                   package = 'segmenter')
 #'

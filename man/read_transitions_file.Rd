@@ -20,9 +20,7 @@ The segments files are the output of running \code{learn_model} and named
 }
 \examples{
 # locate the file
-fl <- system.file('extdata/output',
-                           'transitions_3.txt',
-                           package = 'segmenter')
+fl <- file.path(tempdir(), 'transitions_3.txt')
 
 # read the file
 read_transitions_file(fl)

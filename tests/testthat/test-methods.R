@@ -1,16 +1,16 @@
 context("Test S4 Methods")
 
 test_that("accessors works", {
-    inputdir <- system.file('extdata/ChromHMM/SAMPLEDATA_HG18',
+    inputdir <- system.file('extdata/SAMPLEDATA_HG18',
                             package = 'segmenter')
     outputdir <- tempdir()
-    coordsdir <- system.file('extdata/ChromHMM/COORDS',
-                             package = 'segmenter')
-    anchorsdir <- system.file('extdata/ChromHMM/ANCHORFILES',
-                              package = 'segmenter')
-    chromsizefile <- system.file('extdata/ChromHMM/CHROMSIZES',
+    coordsdir <- system.file('extdata/COORDS',
+                             package = 'chromhmmData')
+    anchorsdir <- system.file('extdata/ANCHORFILES',
+                              package = 'chromhmmData')
+    chromsizefile <- system.file('extdata/CHROMSIZES',
                                  'hg18.txt',
-                                 package = 'segmenter')
+                                 package = 'chromhmmData')
     numstates <- 3
     cells <- c('K562', 'GM12878')
 
