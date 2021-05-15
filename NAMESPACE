@@ -69,3 +69,5 @@ importFrom(stats,cor)
 importFrom(utils,count.fields)
 importFrom(utils,read.delim)
 importFrom(utils,stack)
+import(chromhmmData)
+
