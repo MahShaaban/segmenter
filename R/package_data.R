@@ -14,3 +14,6 @@
 
 #' @import chromhmmData
 NULL
+
+#' @import methods
+NULL
