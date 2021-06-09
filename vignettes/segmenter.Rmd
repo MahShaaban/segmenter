@@ -1,6 +1,8 @@
 ---
 title: "Chromatin Segmentation Analysis Using segmenter"
-output: rmarkdown::html_vignette
+output: 
+    rmarkdown::html_vignette:
+        toc: true
 vignette: >
     %\VignetteIndexEntry{Chromatin Segmentation Analysis Using segmenter}
     %\VignetteEngine{knitr::rmarkdown}
@@ -81,7 +83,7 @@ be followed by a detailed description in the following sections.
 
 First, we need to load the package
 
-```{r load_library, eval=FALSE}
+```{r load_library}
 # load library
 library(segmenter)
 ```
@@ -92,7 +94,7 @@ genomic coordinates, anchors files and the chromosomes' sizes file. When more
 than one file is required, passing the directory where they reside is 
 sufficient.
 
-```{r prepare_directories, message = FALSE, eval=FALSE}
+```{r prepare_directories, message = FALSE}
 # locate input and annotation files
 inputdir <- system.file('extdata/SAMPLEDATA_HG18',
                         package = 'segmenter')
@@ -110,7 +112,7 @@ inputs and output the correct file names. Those include the number of states,
 the name of the genome assembly, the names of the cells/conditions, annotation 
 and the bin size that were used to generate the binarized input files.
 
-```{r getting_stated, eval=FALSE}
+```{r getting_stated}
 # run command
 obj <- learn_model(inputdir = inputdir,
                    coordsdir = coordsdir,
@@ -125,7 +127,7 @@ obj <- learn_model(inputdir = inputdir,
 
 To get a quick glance on the return object, just call the `show` method.
 
-```{r show, eval=FALSE}
+```{r show}
 # show the object
 show(obj)
 ```
@@ -256,7 +258,7 @@ desired number of stats, `numstates` and the information that were used to
 generate the binarized files. Those are the names of the genome `assembly`, the
 type of `annotation`, the `binsize` and the names of `cells` or conditions.
 
-```{r run_command, eval=FALSE}
+```{r run_command}
 # run command
 obj <- learn_model(inputdir = inputdir,
                    coordsdir = coordsdir,
@@ -268,11 +270,6 @@ obj <- learn_model(inputdir = inputdir,
                    cells = c('K562', 'GM12878'),
                    annotation = 'RefSeq',
                    binsize = 200)
-```
-
-```{r load_obj,include=FALSE}
-# TODO: to be removed
-obj <- test_obj 
 ```
 
 The return of this function call is the an S4 `segmentation` object, which we
@@ -328,7 +325,7 @@ same inputs except the number of states (`numstates`). The output would be a
 list of `segmentation` objects. `segmenter` contain functions to do basic 
 comparison between the models.
 
-```{r multiple_numstates, eval=FALSE}
+```{r multiple_numstates}
 # relearn the models with 3 to 8 states
 objs <- lapply(3:8,
     function(x) {
@@ -342,11 +339,6 @@ objs <- lapply(3:8,
                    annotation = 'RefSeq',
                    binsize = 200)
     })
-```
-
-```{r load_objs,include=FALSE}
-# TODO: to be removed
-objs <- test_objs
 ```
 
 - `compare_models` takes a list of `segmentation` objects and returns a vector
@@ -610,6 +602,5 @@ interest.
 
 ```{r session}
 sessionInfo()
-
 ```
 
