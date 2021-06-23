@@ -59,8 +59,6 @@ tidy_ranges <- function(gr, columns, low = 0) {
 #' @importFrom GenomicRanges tileGenome mcols bindROWS GRanges granges
 #' @importFrom SummarizedExperiment SummarizedExperiment
 #' @importFrom S4Vectors values 'values<-'
-#'
-#' @export
 range_bins <- function(bins, chromsizefile, binsize, return = 'GRanges',
                        tidy = TRUE) {
     # make a named vector of chrom lengths
@@ -133,8 +131,6 @@ range_bins <- function(bins, chromsizefile, binsize, return = 'GRanges',
 #' @importFrom SummarizedExperiment SummarizedExperiment
 #' @importFrom S4Vectors values 'values<-'
 #' @importFrom GenomicRanges mcols
-#'
-#' @export
 range_counts <- function(counts, features, return = 'GRanges', tidy = FALSE,
                          average = FALSE, marks) {
     # make a matrix of counts
@@ -191,8 +187,6 @@ range_counts <- function(counts, features, return = 'GRanges', tidy = FALSE,
 #'
 #' @return A \code{SummarizedExperiment} object with \code{ranges} as its
 #' \code{rowRanges} and the counts as the \code{assay}.
-#'
-#' @export
 count_reads_ranges <- function(ranges, cellmarkfiletable, inputbamdir) {
     # read input_file
     input <- read_cellmark_file(cellmarkfiletable)
@@ -239,8 +233,6 @@ count_reads_ranges <- function(ranges, cellmarkfiletable, inputbamdir) {
 #' @importFrom SummarizedExperiment rowRanges SummarizedExperiment assay
 #' @importFrom IRanges mergeByOverlaps
 #' @importFrom S4Vectors values 'values<-'
-#'
-#' @export
 merge_segments_bins <- function(segments, bins) {
     # extract row ranges of bins
     bins_ranges <- rowRanges(bins)
